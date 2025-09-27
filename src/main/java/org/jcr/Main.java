@@ -54,6 +54,7 @@ public class Main {
     private static Hospital inicializarHospital() {
         System.out.println("Inicializando hospital y departamentos...");
 
+        /* Sin builder
         // Crear hospital principal
         Hospital hospital = new Hospital("Hospital Central", "Av. Libertador 1234", "011-4567-8901");
 
@@ -61,6 +62,30 @@ public class Main {
         Departamento cardiologia = new Departamento("Cardiología", EspecialidadMedica.CARDIOLOGIA);
         Departamento pediatria = new Departamento("Pediatría", EspecialidadMedica.PEDIATRIA);
         Departamento traumatologia = new Departamento("Traumatología", EspecialidadMedica.TRAUMATOLOGIA);
+        */
+
+        //Con builder
+        // Hospital
+        Hospital hospital = Hospital.builder()
+                .nombre("Hospital Central")
+                .direccion("Av libertador 1234")
+                .telefono("261227778")
+                .build();
+        //Departamentos especializados
+        Departamento cardiologia = Departamento.builder()
+                .nombre("Cardiologia")
+                .especialidad(EspecialidadMedica.CARDIOLOGIA)
+                .build();
+
+        Departamento pediatria = Departamento.builder()
+                .nombre("Pediatria")
+                .especialidad(EspecialidadMedica.PEDIATRIA)
+                .build();
+        Departamento traumatologia = Departamento.builder()
+                .nombre("Traumatologia")
+                .especialidad(EspecialidadMedica.TRAUMATOLOGIA)
+                .build();
+
 
         // Asignar departamentos al hospital
         hospital.agregarDepartamento(cardiologia);
@@ -90,7 +115,7 @@ public class Main {
         System.out.println("Registrando médicos especialistas...");
 
         List<Medico> medicos = new ArrayList<>();
-
+        /* Sin builder
         // Crear médicos especialistas
         Medico cardiologo = new Medico("Carlos", "González", "12345678",
                 LocalDate.of(1975, 5, 15), TipoSangre.A_POSITIVO,
@@ -102,7 +127,39 @@ public class Main {
 
         Medico traumatologo = new Medico("Luis", "Rodríguez", "34567890",
                 LocalDate.of(1978, 3, 10), TipoSangre.B_POSITIVO,
-                "MP-34567", EspecialidadMedica.TRAUMATOLOGIA);
+                "MP-34567", EspecialidadMedica.TRAUMATOLOGIA);*/
+
+        // con builder
+
+        Medico cardiologo = Medico.builder()
+                .nombre("Roque")
+                .apellido("Altamiranda")
+                .dni("9876453")
+                .fechaNacimiento(LocalDate.of(1956, 7,12))
+                .tipoSangre(TipoSangre.O_NEGATIVO)
+                .numeroMatricula("MP-23245")
+                .especialidad(EspecialidadMedica.CARDIOLOGIA)
+                .build();
+
+        Medico pediatra = Medico.builder()
+                .nombre("Elida")
+                .apellido("Martinez")
+                .dni("8876453")
+                .fechaNacimiento(LocalDate.of(1953, 10,27))
+                .tipoSangre(TipoSangre.A_POSITIVO)
+                .numeroMatricula("MP-23434")
+                .especialidad(EspecialidadMedica.PEDIATRIA)
+                .build();
+
+        Medico traumatologo = Medico.builder()
+                .nombre("Agustin")
+                .apellido("Fernandez")
+                .dni("41276453")
+                .fechaNacimiento(LocalDate.of(1998 , 12,14))
+                .tipoSangre(TipoSangre.A_NEGATIVO)
+                .numeroMatricula("MP-23434")
+                .especialidad(EspecialidadMedica.TRAUMATOLOGIA)
+                .build();
 
         // Asignar médicos a sus departamentos correspondientes
         for (Departamento dep : hospital.getDepartamentos()) {
@@ -130,7 +187,7 @@ public class Main {
         System.out.println("Registrando pacientes...");
 
         List<Paciente> pacientes = new ArrayList<>();
-
+        /* Sin builder
         // Crear pacientes con diferentes perfiles
         Paciente pacienteCardiaco = new Paciente("María", "López", "11111111",
                 LocalDate.of(1985, 12, 5), TipoSangre.A_POSITIVO,
@@ -142,7 +199,37 @@ public class Main {
 
         Paciente pacienteTraumatologico = new Paciente("Elena", "Fernández", "33333333",
                 LocalDate.of(1992, 9, 28), TipoSangre.AB_NEGATIVO,
-                "011-3333-3333", "Belgrano 789");
+                "011-3333-3333", "Belgrano 789");*/
+
+
+        Paciente pacienteCardiaco = Paciente.builder()
+                .nombre("Hugo")
+                .apellido("Fernandez")
+                .dni("20652053")
+                .fechaNacimiento(LocalDate.of(1969, 4,11))
+                .tipoSangre(TipoSangre.A_POSITIVO)
+                .telefono("35353535")
+                .direccion("Calle sin existir")
+                .build();
+
+        Paciente pacientePediatrico = Paciente.builder()
+                .nombre("Jose")
+                .apellido("Garcia")
+                .dni("6023244")
+                .fechaNacimiento(LocalDate.of(2015, 4,11))
+                .tipoSangre(TipoSangre.B_POSITIVO)
+                .telefono("3535839853")
+                .direccion("Rondeau 133")
+                .build();
+        Paciente pacienteTraumatologico = Paciente.builder()
+                .nombre("Monica")
+                .apellido("Moyano")
+                .dni("10032323")
+                .fechaNacimiento(LocalDate.of(1963, 4,11))
+                .tipoSangre(TipoSangre.AB_NEGATIVO)
+                .telefono("3535839853")
+                .direccion("Belgrano 3223")
+                .build();
 
         // Registrar pacientes en el hospital
         hospital.agregarPaciente(pacienteCardiaco);

@@ -1,19 +1,31 @@
 package org.jcr.entidades;
+import lombok.*;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Map;
 import java.util.Objects;
 
+@Getter
+@ToString(onlyExplicitlyIncluded = true)
+
+
 public class Cita implements Serializable {
     private final Paciente paciente;
     private final Medico medico;
     private final Sala sala;
+    @ToString.Include
     private final LocalDateTime fechaHora;
     private final BigDecimal costo;
     private EstadoCita estado;
     private String observaciones;
 
+
+    //Lombok y builder
+
+
+    @Builder
     public Cita(Paciente paciente, Medico medico, Sala sala, LocalDateTime fechaHora, BigDecimal costo) {
         this.paciente = Objects.requireNonNull(paciente, "El paciente no puede ser nulo");
         this.medico = Objects.requireNonNull(medico, "El médico no puede ser nulo");
@@ -24,7 +36,7 @@ public class Cita implements Serializable {
         this.observaciones = "";
     }
 
-    public Paciente getPaciente() {
+    /*public Paciente getPaciente() {
         return paciente;
     }
 
@@ -46,20 +58,22 @@ public class Cita implements Serializable {
 
     public EstadoCita getEstado() {
         return estado;
-    }
+    }*/   //Todo esto se elimina ya que se implementa con lombok
 
     public void setEstado(EstadoCita estado) {
         this.estado = Objects.requireNonNull(estado, "El estado no puede ser nulo");
     }
-
+    /*
     public String getObservaciones() {
         return observaciones;
-    }
+    }*/ // Se deja de usar gracias a lombok
 
     public void setObservaciones(String observaciones) {
         this.observaciones = observaciones != null ? observaciones : "";
     }
 
+
+    /*
     @Override
     public String toString() {
         return "Cita{" +
@@ -70,7 +84,9 @@ public class Cita implements Serializable {
                 ", estado=" + estado.getDescripcion() +
                 ", costo=" + costo +
                 '}';
-    }
+    }*/
+
+    //Metodos con reglas de negocio se mantienen igual
 
     public String toCsvString() {
         return String.format("%s,%s,%s,%s,%s,%s,%s",

@@ -1,23 +1,33 @@
 package org.jcr.entidades;
 
+import lombok.Builder;
+import lombok.Getter;
+import lombok.ToString;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+//Lombok
+@Getter
+@ToString(onlyExplicitlyIncluded = true)
 
 public class Sala implements Serializable {
+    @ToString.Include
     private final String numero;
     private final String tipo;
     private final Departamento departamento;
     private final List<Cita> citas = new ArrayList<>();
 
+
+    @Builder
     public Sala(String numero, String tipo, Departamento departamento) {
         this.numero = validarString(numero, "El número de sala no puede ser nulo ni vacío");
         this.tipo = validarString(tipo, "El tipo de sala no puede ser nulo ni vacío");
         this.departamento = Objects.requireNonNull(departamento, "El departamento no puede ser nulo");
     }
-
+    /*
     public String getNumero() {
         return numero;
     }
@@ -28,7 +38,7 @@ public class Sala implements Serializable {
 
     public Departamento getDepartamento() {
         return departamento;
-    }
+    }*/
 
     public void addCita(Cita cita) {
         this.citas.add(cita);
@@ -45,7 +55,7 @@ public class Sala implements Serializable {
         }
         return valor;
     }
-
+    /*
     @Override
     public String toString() {
         return "Sala{" +
@@ -53,5 +63,5 @@ public class Sala implements Serializable {
                 ", tipo='" + tipo + '\'' +
                 ", departamento=" + departamento.getNombre() +
                 '}';
-    }
+    }*/
 }

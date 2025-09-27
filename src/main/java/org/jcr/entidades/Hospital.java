@@ -1,23 +1,34 @@
 package org.jcr.entidades;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.ToString;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
+
+@Getter
+@ToString(onlyExplicitlyIncluded = true)
+
 public class Hospital implements Serializable {
-    private final String nombre;
-    private final String direccion;
-    private final String telefono;
+    @ToString.Include
+    private final String nombre, direccion, telefono;
+    //private final String direccion;
+    //private final String telefono;
     private final List<Departamento> departamentos = new ArrayList<>();
     private final List<Paciente> pacientes = new ArrayList<>();
 
+
+    @Builder
     public Hospital(String nombre, String direccion, String telefono) {
         this.nombre = validarString(nombre, "El nombre del hospital no puede ser nulo ni vacío");
         this.direccion = validarString(direccion, "La dirección no puede ser nula ni vacía");
         this.telefono = validarString(telefono, "El teléfono no puede ser nulo ni vacío");
     }
-
+    /*
     public String getNombre() {
         return nombre;
     }
@@ -28,7 +39,7 @@ public class Hospital implements Serializable {
 
     public String getTelefono() {
         return telefono;
-    }
+    }*/
 
     public void agregarDepartamento(Departamento departamento) {
         if (departamento != null && !departamentos.contains(departamento)) {
@@ -59,7 +70,7 @@ public class Hospital implements Serializable {
     List<Paciente> getInternalPacientes() {
         return pacientes;
     }
-
+    /*
     @Override
     public String toString() {
         return "Hospital{" +
@@ -67,7 +78,7 @@ public class Hospital implements Serializable {
                 ", direccion='" + direccion + '\'' +
                 ", telefono='" + telefono + '\'' +
                 '}';
-    }
+    }*/
 
     private String validarString(String valor, String mensajeError) {
         Objects.requireNonNull(valor, mensajeError);

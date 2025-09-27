@@ -1,5 +1,8 @@
 package org.jcr.entidades;
 
+import lombok.Getter;
+import lombok.ToString;
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -7,7 +10,11 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
+@Getter
+@ToString(onlyExplicitlyIncluded = true)
+
 public class HistoriaClinica implements Serializable {
+    @ToString.Include
     private final String numeroHistoria;
     private final Paciente paciente;
     private final LocalDateTime fechaCreacion;
@@ -25,6 +32,7 @@ public class HistoriaClinica implements Serializable {
         return "HC-" + paciente.getDni() + "-" + fechaCreacion.getYear();
     }
 
+    /*
     public String getNumeroHistoria() {
         return numeroHistoria;
     }
@@ -35,7 +43,7 @@ public class HistoriaClinica implements Serializable {
 
     public LocalDateTime getFechaCreacion() {
         return fechaCreacion;
-    }
+    }*/
 
     public void agregarDiagnostico(String diagnostico) {
         if (diagnostico != null && !diagnostico.trim().isEmpty()) {
@@ -66,7 +74,7 @@ public class HistoriaClinica implements Serializable {
     public List<String> getAlergias() {
         return Collections.unmodifiableList(alergias);
     }
-
+    /*
     @Override
     public String toString() {
         return "HistoriaClinica{" +
@@ -74,5 +82,5 @@ public class HistoriaClinica implements Serializable {
                 ", paciente=" + paciente.getNombreCompleto() +
                 ", fechaCreacion=" + fechaCreacion +
                 '}';
-    }
+    }*/
 }

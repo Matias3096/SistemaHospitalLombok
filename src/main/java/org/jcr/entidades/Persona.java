@@ -1,12 +1,18 @@
 package org.jcr.entidades;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
+@Getter
+@ToString(onlyExplicitlyIncluded = true) // Solo imprimimos lo que marquemos con @ToString....
+
 public abstract class Persona implements Serializable {
-    protected final String nombre;
-    protected final String apellido;
-    protected final String dni;
+    @ToString.Include
+    protected final String nombre, apellido,dni;
     protected final LocalDate fechaNacimiento;
     protected final TipoSangre tipoSangre;
 
@@ -18,7 +24,7 @@ public abstract class Persona implements Serializable {
         this.tipoSangre = Objects.requireNonNull(tipoSangre, "El tipo de sangre no puede ser nulo");
     }
 
-    public String getNombre() {
+    /*public String getNombre() {
         return nombre;
     }
 
@@ -36,7 +42,7 @@ public abstract class Persona implements Serializable {
 
     public TipoSangre getTipoSangre() {
         return tipoSangre;
-    }
+    }*/
 
     public String getNombreCompleto() {
         return nombre + " " + apellido;
@@ -62,7 +68,7 @@ public abstract class Persona implements Serializable {
         return dni;
     }
 
-    @Override
+    /*@Override
     public String toString() {
         return "Persona{" +
                 "nombre='" + nombre + '\'' +
@@ -71,5 +77,5 @@ public abstract class Persona implements Serializable {
                 ", fechaNacimiento=" + fechaNacimiento +
                 ", tipoSangre=" + tipoSangre.getDescripcion() +
                 '}';
-    }
+    }*/
 }

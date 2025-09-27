@@ -1,5 +1,9 @@
 package org.jcr.entidades;
 
+import lombok.Builder;
+import lombok.Getter;
+import lombok.ToString;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -7,13 +11,20 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
+
+@Getter
+@ToString(onlyExplicitlyIncluded = true)
+
 public class Paciente extends Persona implements Serializable {
     private final HistoriaClinica historiaClinica;
+    @ToString.Include
     private final String telefono;
     private final String direccion;
     private Hospital hospital;
     private final List<Cita> citas = new ArrayList<>();
 
+
+    @Builder  // Permite crear instancias con menos codigo
     public Paciente(String nombre, String apellido, String dni, LocalDate fechaNacimiento,
                     TipoSangre tipoSangre, String telefono, String direccion) {
         super(nombre, apellido, dni, fechaNacimiento, tipoSangre);
@@ -21,7 +32,7 @@ public class Paciente extends Persona implements Serializable {
         this.direccion = validarString(direccion, "La dirección no puede ser nula ni vacía");
         this.historiaClinica = new HistoriaClinica(this);
     }
-
+    /*
     public HistoriaClinica getHistoriaClinica() {
         return historiaClinica;
     }
@@ -36,7 +47,7 @@ public class Paciente extends Persona implements Serializable {
 
     public Hospital getHospital() {
         return hospital;
-    }
+    }*/
 
     public void setHospital(Hospital hospital) {
         if (this.hospital != hospital) {
@@ -65,7 +76,7 @@ public class Paciente extends Persona implements Serializable {
         }
         return valor;
     }
-
+    /*
     @Override
     public String toString() {
         return "Paciente{" +
@@ -75,5 +86,5 @@ public class Paciente extends Persona implements Serializable {
                 ", telefono='" + telefono + '\'' +
                 ", tipoSangre=" + tipoSangre.getDescripcion() +
                 '}';
-    }
+    }*/
 }
